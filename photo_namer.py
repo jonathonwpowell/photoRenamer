@@ -1,26 +1,29 @@
+	#find file location
 import sys
 import os
 import shutil
 
-if sys.argv[1] == "-h":
-	print "Usage: photo_namer.py [-h] [-f #]"
-	print "-f = number changed in the first folder"
-	print "-h = help"
-	print "Example: photo_namer.py -f 23 (where 23 is the number renamed in the first folder)"
-	print "This is useful if the photos where split into two folders"
-	sys.exit()
-#find file location
+if len(sys.argv) > 1: 
+	if sys.argv[1] == "-h":
+		print "Usage: photo_namer.py [-h] [-f #]"
+		print "-f = number changed in the first folder"
+		print "-h = help"
+		print "Example: photo_namer.py -f 23 (where 23 is the number renamed in the first folder)"
+		print "This is useful if the photos where split into two folders"
+		sys.exit()
+	if sys.argv[1] == "-f":
+		try:
+			num_to_ignore = sys.argv[2]
+		except:
+			print "Incomplete command, please use -h for help"
+			sys.exit()
+
+	
 
 num_ignored = 0;
 num_to_ignore = 0;
 
-if sys.argv[1] == "-f":
-	try:
-		num_to_ignore = sys.argv[2]
-	except:
-		print "Incomplete command, please use -h for help"
-		sys.exit()
-
+#find file location
 while True:
 	pic_location = raw_input("Please enter location of pictures: ")
 	if os.path.exists(pic_location):
@@ -91,4 +94,3 @@ for x in range(0,num_of_strains):
 					if not found_file:
 						print "***WARNING: PICTURES SPLIT BETWEEN TWO FOLDERS***"
 						sys.exit()
-					
